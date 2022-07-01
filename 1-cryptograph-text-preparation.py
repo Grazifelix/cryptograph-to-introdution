@@ -1,7 +1,7 @@
 # 01/07/22
 # Graziela Felix
 
-mensage = input('Insira sua mensagem: ')
+mensage = input('Mensagem: ')
 
 
 # remove especials and blank characters
@@ -17,11 +17,16 @@ def clean_text(m):
 
 def comparacao(letra):
     alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
-                'V', 'W', 'X', 'Y', 'Z']
-    for a in alphabet:
-        if letra == a:
-            return True
-    return False
+                'V', 'W', 'X', 'Y', 'Z', 'Á', 'É', 'Í', 'Ó', 'Ú', 'Ê', 'Ô', 'Ã', 'Õ']
+
+    if letra == ' ':
+        return False
+
+    else:
+        for a in alphabet:
+            if letra == a:
+                return True
+        return False
 
 
 print(clean_text(mensage))
