@@ -15,7 +15,7 @@ def clean_text(m):
     return result
 
 
-def comparacao(letra):
+def text_compare(letra):
     alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
                 'V', 'W', 'X', 'Y', 'Z', 'Á', 'É', 'Í', 'Ó', 'Ú', 'Ê', 'Ô', 'Ã', 'Õ']
 
