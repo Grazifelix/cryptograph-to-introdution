@@ -1,8 +1,10 @@
 # 06/07/22
 
-mensage = input('Mensagem: ')
+mensage = input('Mensage: ')
+alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
+                'V', 'W', 'X', 'Y', 'Z']
 
-# Limpeza
+# cleaning
 def clean_text(m):
     result = ''
     for letra in m:
@@ -14,9 +16,6 @@ def clean_text(m):
 
 
 def comparacao(letra):
-    alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
-                'V', 'W', 'X', 'Y', 'Z', 'Á', 'É', 'Í', 'Ó', 'Ú', 'Ê', 'Ô', 'Ã', 'Õ']
-
     if letra == ' ':
         return True
 
@@ -26,16 +25,16 @@ def comparacao(letra):
                 return True
         return False
 
-# Atashi cipher
+# Atbash Cipher
 
 mensage_clean = clean_text(mensage)
 
-def atashiCipher(mc):
-    alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
-                'V', 'W', 'X', 'Y', 'Z']
+
+def atbash_cipher(mc):
+
     result = ''
     for mcl in mc:
-        i = contNumber(mcl.upper())
+        i = cont_number(mcl.upper())
         if i is None:
             result = result + ' '
         else:
@@ -44,13 +43,11 @@ def atashiCipher(mc):
     return result
 
 
-def contNumber(n):
-    alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
-                'V', 'W', 'X', 'Y', 'Z']
+def cont_number(n):
     cont = 0
     for a in alphabet:
         cont += 1
         if n == a:
             return cont
 
-print(atashiCipher(mensage_clean))
+print(atbash_cipher(mensage_clean))
