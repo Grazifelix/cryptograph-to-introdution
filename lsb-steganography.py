@@ -18,3 +18,20 @@ def Encode(src, message, dest):
         n = 4
 
     total_pixels = array.size//n
+
+# LSB-STEGANOGRAPHY
+def main():
+    func = input("1: Encode\n2: Decode\n")
+    src = input("Enter Source Image Path\n")
+
+    if func == '1':
+        message = input("Enter Message to Hide\n")
+        dest = ("Enter Destination Image Path\n")
+        print("Encoding...")
+
+    if func == '2':
+        print("Decoding...")
+
+if __name__ == "__main__":
+    main()
+
