@@ -9,35 +9,47 @@ from PIL import Image
 
 # enconde fuction
 def encode(src, message, dest):
+    # convert the source image into a NumPy array of pixels
+    # store the size of the image
+
     img = Image.open(src, 'r')
     width, height = img.size
     array = np.array(list(img.getdata()))
 
+    # check if the mode of the image is RGB or RGBA and set the value of n
     n = 0
     if img.mode == 'RGB':
         n = 3
     elif img.mode == 'RGBA':
         n = 4
 
+    # calculate the total number of pixels.
     total_pixels = array.size//n
 
+    # add a delimiter (“$t3g0") at the end of the secret message
     message += '$t3g0'
+    # convert this updated message to binary form and calculate the required pixels.
     b_message = ''.join([format(ord(i), "08b") for i in message])
     req_pixels = len(b_message)
 
+    # check if the total pixels available is sufficient for the secret message or not
     if req_pixels > total_pixels:
         print(f"{style_color_white}{style_bcg_magenta}ERROR: need a larger file size{style_clean}")
     else:
+        # iterating the pixels one by one and modifying their least significant
+        # bits to the bits of the secret message until the complete message including the delimiter has been hidden.
         index = 0
         for p in range(total_pixels):
             for q in range(0, 3):
                 if index < req_pixels:
                     array[p][q] = int(bin(array[p][q])[2:9] + b_message[index], 2)
                     index += 1
+
+        # "have the updated pixels array and we can use this to create and save it as the destination output image"
         array = array.reshape(height, width, n)
         enc_img = Image.fromarray(array.astype('uint8'), img.mode)
         enc_img.save(f"{dest}/enc_img.png")
-        print(f"{style_color_white}{style_bcg_magenta}[45m Image Encoded Sucessfully {style_clean}")
+        print(f"{style_color_white}{style_bcg_magenta}Image Encoded Sucessfully{style_clean}")
 
 
 # decode function
@@ -78,17 +90,17 @@ def decode(src):
 # LSB-STEGANOGRAPHY
 def main():
 
-    func = input(f"{style_color_magenta}1: Encode\n2: Decode\n {style_clean}")
-    src = input(f"{style_color_magenta} Enter Source Image Path\n {style_clean}")
+    func = input(f"{style_color_magenta}1: Encode\n2: Decode\n{style_clean}")
+    src = input(f"{style_color_magenta}Enter Source Image Path\n{style_clean}")
 
     if func == '1':
-        message = input(f"{style_color_magenta} Enter Message to Hide\n {style_clean}")
-        dest = input(f"{style_color_magenta} Enter Destination Image Path\n {style_clean}")
-        print(f"{style_color_magenta}{style_italic} Encoding...{style_clean}")
+        message = input(f"{style_color_magenta}Enter Message to Hide\n{style_clean}")
+        dest = input(f"{style_color_magenta}Enter Destination Image Path\n{style_clean}")
+        print(f"{style_color_magenta}{style_italic}Encoding...{style_clean}")
         encode(src, message, dest)
 
     if func == '2':
-        print(f"{style_color_magenta} {style_italic} Decoding...{style_clean}")
+        print(f"{style_color_magenta}{style_italic}Decoding...{style_clean}")
         decode(src)
 
 
