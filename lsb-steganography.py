@@ -37,7 +37,7 @@ def encode(src, message, dest):
         array = array.reshape(height, width, n)
         enc_img = Image.fromarray(array.astype('uint8'), img.mode)
         enc_img.save(f"{dest}/enc_img.png")
-        print("Image Encoded Sucessfully")
+        print("\u001b[37m \u001b[45m Image Encoded Sucessfully \u001b[m")
 
 
 # decode function
@@ -70,24 +70,24 @@ def decode(src):
     #check if the delimiter was found or not.
     # If not, that means there was no hidden message in the image.
     if "$t3g0" in message:
-        print("Hidden Message:", message[:-5])
+        print("\u001b[37m \u001b[45m Hidden Message:\u001b[m", message[:-5])
     else:
-        print("No hidden Message Found")
+        print("\u001b[37m \u001b[45m No hidden Message Found \u001b[m")
 
 
 # LSB-STEGANOGRAPHY
 def main():
-    func = input("1: Encode\n2: Decode\n")
-    src = input("Enter Source Image Path\n")
+    func = input("\u001b[35m1: Encode\n2: Decode\n \u001b[m")
+    src = input("\u001b[35m Enter Source Image Path\n \u001b[m")
 
     if func == '1':
-        message = input("Enter Message to Hide\n")
-        dest = input("Enter Destination Image Path\n")
-        print("Encoding...")
+        message = input("\u001b[35m Enter Message to Hide\n \u001b[m")
+        dest = input("\u001b[35m Enter Destination Image Path\n \u001b[m")
+        print("\u001b[35m Encoding...\u001b[m")
         encode(src, message, dest)
 
     if func == '2':
-        print("Decoding...")
+        print("\u001b[3m \u001b[35m Decoding...\u001b[m")
         decode(src)
 
 if __name__ == "__main__":
