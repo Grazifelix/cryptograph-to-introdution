@@ -26,7 +26,7 @@ def encode(src, message, dest):
     req_pixels = len(b_message)
 
     if req_pixels > total_pixels:
-        print("ERROR: need a larger file size")
+        print(f"{style_color_white}{style_bcg_magenta}ERROR: need a larger file size{style_clean}")
     else:
         index = 0
         for p in range(total_pixels):
@@ -37,7 +37,7 @@ def encode(src, message, dest):
         array = array.reshape(height, width, n)
         enc_img = Image.fromarray(array.astype('uint8'), img.mode)
         enc_img.save(f"{dest}/enc_img.png")
-        print("\u001b[37m \u001b[45m Image Encoded Sucessfully \u001b[m")
+        print(f"{style_color_white}{style_bcg_magenta}[45m Image Encoded Sucessfully {style_clean}")
 
 
 # decode function
@@ -67,28 +67,40 @@ def decode(src):
         else:
             message += chr(int(hidden_bits[i], 2))
 
-    #check if the delimiter was found or not.
+    # check if the delimiter was found or not.
     # If not, that means there was no hidden message in the image.
     if "$t3g0" in message:
-        print("\u001b[37m \u001b[45m Hidden Message:\u001b[m", message[:-5])
+        print(f"{style_color_white}{style_bcg_magenta}Hidden Message:{style_clean}", message[:-5])
     else:
-        print("\u001b[37m \u001b[45m No hidden Message Found \u001b[m")
+        print(f"{style_color_white}{style_bcg_magenta}No hidden Message Found{style_clean}")
 
 
 # LSB-STEGANOGRAPHY
 def main():
-    func = input("\u001b[35m1: Encode\n2: Decode\n \u001b[m")
-    src = input("\u001b[35m Enter Source Image Path\n \u001b[m")
+
+    func = input(f"{style_color_magenta}1: Encode\n2: Decode\n {style_clean}")
+    src = input(f"{style_color_magenta} Enter Source Image Path\n {style_clean}")
 
     if func == '1':
-        message = input("\u001b[35m Enter Message to Hide\n \u001b[m")
-        dest = input("\u001b[35m Enter Destination Image Path\n \u001b[m")
-        print("\u001b[35m Encoding...\u001b[m")
+        message = input(f"{style_color_magenta} Enter Message to Hide\n {style_clean}")
+        dest = input(f"{style_color_magenta} Enter Destination Image Path\n {style_clean}")
+        print(f"{style_color_magenta}{style_italic} Encoding...{style_clean}")
         encode(src, message, dest)
 
     if func == '2':
-        print("\u001b[3m \u001b[35m Decoding...\u001b[m")
+        print(f"{style_color_magenta} {style_italic} Decoding...{style_clean}")
         decode(src)
+
+
+# styles
+style_clean = '\u001b[m'
+style_color_magenta = "\u001b[35m"
+style_color_white = "\u001b[37m"
+style_bcg_magenta = "\u001b[45m"
+style_italic = "\u001b[3m"
 
 if __name__ == "__main__":
     main()
+
+
+
