@@ -2,11 +2,11 @@ from efficient_modular_exponentiation import efficient_modular_exponentiation
 from large_prime_number_generator import large_prime_number_generator
 import random
 import math
-
+from Crypto.Util import number
 
 def rsa_cryptosystem(message_to_encode, prime_number_length):
-
     # choose two prime number (private keys) P and Q
+
     p = large_prime_number_generator(prime_number_length)
     q = large_prime_number_generator(prime_number_length)
 
@@ -29,26 +29,8 @@ def rsa_cryptosystem(message_to_encode, prime_number_length):
                 print("E:", e_key)
                 return e_key
 
-    # calculating private key D
-    # def find_d(e, totient):
-    #     i = 1
-    #     bb = True
-    #     for i in range(0, totient-1):
-    #         if (e * i) % totient == 1:
-    #             print("d:", i)
-    #             bb = False
-    #             return i
-    #         i += 1
-    #     print("Não encontrado")
-    #
-    #     # while bb:
-    #     #     if (e * i) % totient == 1:
-    #     #         print("d:", i)
-    #     #         bb = False
-    #     #         return i
-    #     #     i += 1
-
     e_key = co_prime_number(totient)
+
     encrypt = []
 
     for uni_m in message_to_encode:
@@ -56,8 +38,6 @@ def rsa_cryptosystem(message_to_encode, prime_number_length):
         encrypt.append(result)
     return encrypt
 
-    # d = find_d(e, totient)
-    # print(d)
 
 
 def main():
@@ -67,8 +47,7 @@ def main():
     for m in message:
         unicode_message.append(ord(m))
     print(unicode_message)
-    print(rsa_cryptosystem(unicode_message, prime_number_length))
-
+    print("Mensage: \n", " ".join(map(str, rsa_cryptosystem(unicode_message, prime_number_length))))
 
 if __name__ == "__main__":
     main()
