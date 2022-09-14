@@ -42,4 +42,4 @@ def prime_number_generator(prime_number_length):
 
 if __name__ == "__main__":
     key_number = int(input("Length of prime numbers keys: "))
-    print(prime_number_generator(7))
+    print(prime_number_generator(key_number))
