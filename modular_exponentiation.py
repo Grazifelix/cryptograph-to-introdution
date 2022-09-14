@@ -3,9 +3,11 @@
 
 
 # function A^B mod C
+
 def modular_exponentiation(base, exponent, modulo):
     result = 1
-    # change the exponent to a binary number
+
+    # # change the exponent to a binary number
     binary = bin(exponent)
     binary = binary[2:]
     binary = binary[::-1]
